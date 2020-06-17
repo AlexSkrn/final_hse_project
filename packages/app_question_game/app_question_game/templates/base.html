@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+</head>
+
+<body>
+
+  <div class="topnav">
+    <a id="home" href="{{ url_for('main') }}">
+      Главная
+    </a>
+    <div class="topnav-right">
+      <a id="help" href="{{ url_for('upload') }}">
+        Загрузка
+      </a>
+    </div>
+  </div>
+
+  <title>Название</title>
+
+  <div class="main">
+
+  	<h1>{% block title %} {% endblock title %}</h1>
+
+      {% block content %} {% endblock content %}
+
+  </div>
+
+
+
+		<footer>
+		  <p>Страница проекта на Гитхабе: 
+		    <a href="github.com/AlexSkrn/final_hse_project"> github.com/AlexSkrn/final_hse_project</a>
+		  </p>
+		</footer>
+
+</body>
+</html>

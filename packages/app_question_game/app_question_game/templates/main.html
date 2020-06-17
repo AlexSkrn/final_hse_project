@@ -1,0 +1,111 @@
+<!-- https://jinja.palletsprojects.com/en/2.11.x/templates/ -->
+<!-- https://stackoverflow.com/questions/32019733/getting-value-from-select-tag-using-flask -->
+{% extends 'base.html' %}
+
+{% block title %}
+Упражнения для перевода с английского на русский
+{% endblock title %}
+
+{% block content %}
+
+<script type="text/javascript"
+        src="{{ url_for('static', filename='scripts.js') }}">
+</script>
+
+Выбранные темы:
+<form method="GET">
+  {% if selected_topics %}
+      <p>{{ selected_topics }}</p>
+      <button type="submit" name="submit_button" value="clear">Очистить темы</button>
+     {% else %} Не выбрано
+  {% endif %}
+</form>
+
+<div id="outer">
+
+    <!-- <div class="inner">
+      <form method="GET">
+        <button type="submit" name="submit_button" value="clear">Очистить темы</button>
+      </form>
+    </div> -->
+
+    <div class="inner">
+      <form method="GET">
+        <button type="submit" name="submit_button" value="reporting">Скачать отчет</button>
+      </form>
+    </div>
+
+</div>
+
+<form method="GET">
+  <select id="topics" name="topics" multiple>
+    <option value="all">Все</option>
+    {% if available_topics %}
+      {% for topic in available_topics %}
+      <option value="{{ topic }}">{{ topic }}</option>
+      {% endfor %}
+    {% endif %}
+  </select>
+    <button type="submit" name="submit_button" value="submit_topics">Добавить тему</button>
+  </form>
+<br>
+<br>
+<form method="GET">
+  Q: <button type="submit" name="submit_button" value="question">Новый вопрос!</button>
+</form>
+
+
+{% if data %}
+
+<!-- input type="text" -->
+<textarea
+       name="question"
+       value=" {{ data['Q'] }} "
+       id="question"
+       x-webkit-speech>{{ data['Q'] }}</textarea>
+       <!-- value=" {{ data['Q'] }} " -->
+       <!-- style="position:absolute;right:-9999" -->
+       <!-- > -->
+<!-- </input> -->
+<!-- Q: {{ data['Q'] }} <br> -->
+<button id="speak">Speak</button> <button onclick="copy()">Copy</button><br>
+<form method="GET">
+  A: {% if data['A'] %} <p style="color:blue;">{{ data['A'] }}</p> {% else %}
+  <button type="submit" name="submit_button" value="answer">Показать ответ!</button>
+     {% endif %}
+</form>
+
+  {% if data['GuessMask'] %}
+
+     {% if data['GuessMask']|length > 2 %}
+        {% for element in data['GuessMask'][:-2] %}
+           {{ element }} <br>
+        {% endfor %}
+      {% endif %}
+
+    <p> {{ data['GuessMask'][-2] }} </p>
+    {% if data['GuessMask'][-1] %}
+      <p id="source">{{ data['GuessMask'][-1] }}</p> <button onclick="copyPaste('source')">Copy/Paste</button>
+    {% endif %}
+
+  {% endif %}
+
+{% endif %}
+
+<br><br>
+
+<form method="POST" enctype=multipart/form-data>
+  <!-- <input type="text" name="guess" size=100> -->
+  <label for "guess">Введите перевод...</label>
+  <textarea name="guess" id="target"></textarea>
+  <input type="submit" name="guess" value="Проверить!">
+</form>
+
+
+
+
+<script type="text/javascript"
+        src="{{ url_for('static', filename='speech.js') }}">
+</script>
+
+{% endblock content %}

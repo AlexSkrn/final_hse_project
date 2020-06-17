@@ -1,0 +1,6 @@
+recursive-include ./question_game/*
+
+include ./requirements.txt
+
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]

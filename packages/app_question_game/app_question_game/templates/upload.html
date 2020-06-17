@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Загрузка файла
+{% endblock title %}
+
+{% block content %}
+
+<p>Можно загрузить двуязычный текстовый файл со своими примерами</p>
+
+<form method=post enctype=multipart/form-data>
+  <fieldset>
+
+  <label for=bitext>двуязычный_текст.txt (&lt 50 kB)*: </label>
+  <input type=file name=bitext id=file1><br><br>
+
+  <input type=submit value=Загрузить! class="button"/>
+
+  </fieldset>
+</form>
+
+<p>*Двуязычный txt-файл с разделителями табуляцией, по одной паре предложений на строке</p>
+
+
+{% if stats %}
+<p style="color:blue;">Загружено {{ stats }} строк из файла "{{ filename }}".
+  Вернуться на <a href="{{ url_for('main') }}">главную страницу</a> </p>
+{% endif %}
+
+<script>
+    function hasExtension(inputID, exts) {
+        var fileName = document.getElementById(inputID).value;
+        return (new RegExp('(' + exts.join('|').replace(/\./g, '\\.') + ')$')).test(fileName);
+    }
+
+    var uploadField1 = document.getElementById("file1");
+
+    uploadField1.onchange = function() {
+        if(this.files[0].size > 2 * 1024 * 1024){
+           alert("Слишком большой файл - максимальный размер 2 Мбайта!");
+           this.value = "";
+        } else if (!hasExtension('file1', ['.txt'])) {
+          alert("Расширение файла должно быть txt!");
+          this.value = "";
+        };
+    };
+
+</script>
+
+{% endblock content %}
