@@ -55,13 +55,14 @@ class Question:
 
     def _calc_score(self, guess):
         guess_lemmas, _ = self._get_guess_lemmas_and_text(guess)
-        jaccard_score = jaccard(self._ref_lemmas, guess_lemmas)
+        # jaccard_score = jaccard(self._ref_lemmas, guess_lemmas)
         bleu_score = sentence_bleu(references=[self._ref_lemmas],
                                    hypothesis=guess_lemmas,
                                    weights=(0.25, 0.25, 0, 0),
                                    smoothing_function=chencherry.method2
                                    )
-        return round((jaccard_score + bleu_score) / 2, 2)
+        # return round((jaccard_score + bleu_score) / 2, 2)
+        return round(bleu_score, 2)
 
     def _get_mask(self):
         """Return the answer with words from the guess visible."""
