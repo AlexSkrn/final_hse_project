@@ -25,7 +25,7 @@
     свой перевод           +--------------------------------+
 
     Программа оценивает    +--------------------------------+    Одно слово лишнее,
-    % совпадений и         | (50%) Предложение --- перевода.|    одно не угадано,
+    % совпадений и         | (46%) Предложение --- перевода.|    одно не угадано,
     дает подсказку         +--------------------------------+    неправильный порядок
 ```
 ## Корпус параллельных предложений
@@ -110,24 +110,46 @@ work complete, ukrainian greek, great importance, year perform
 пользователем, и перевод-ориентир лемматизируются с помощью __pymystem3__.
 
 
-## Чтобы запустить программу на своем компьютере
+## Как установить программу на своем компьютере
 
-В командной строке (проверял только на Маке):
+В командной строке на Маке:
 ```
-$ git clone
+$ git clone https://github.com/AlexSkrn/final_hse_project.git
 $ python -m venv .venv
 $ source .venv/bin/activate
 (.venv) $ pip install final_hse_project/packages/question_game/
 (.venv) $ pip install final_hse_project/packages/app_question_game/
-(.venv) $ cd final_hse_project/packages/app_question_game/
+(.venv) $ cd final_hse_project/packages/app_question_game/app_question_game
 (.venv) $ flask run
 ```
-В браузере:
+Наберите в браузере: ```http://127.0.0.1:5000/```
+
+Чтобы остановить сервер, в командной строке: ```CTRL+C```
+
+Деактивировать виртуальное окружение: ```(.venv) $ deactivate```
+
+## Как все это удалить
+
+В терминале сначала вернитесь в директорию, в которую клонирован
+этот проект из Гитхаба, а затем:
 ```
-http://127.0.0.1:5000/
+$ ls -a                      # убедитесь, что Вы в нужной директории
+.			final_hse_project      # содержимое должно быть примерно таким
+..			.venv
+
+$ rm -rf .venv
+$ rm -rf final_hse_project
 ```
 
-Чтобы остановить сервер, в командной строке:
-```
-ctrl+C
-```
+## Для Windows
+
+То же самое, если предварительно установлен терминал Git Bash.
+
+Но, вместо $ source .venv/bin/activate должно быть $ source .venv/Scripts/activate
+
+## pymystem3
+
+Один из используемых пакетов, pymystem3, при первом использовании сохраняет
+файл mystem.exe вот здесь: ```C:/Users/username/.local/bin/mystem.exe```
+
+В Маке это можно найти тут: ```~/.local/bin/mystem```

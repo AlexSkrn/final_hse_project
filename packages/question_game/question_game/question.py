@@ -59,7 +59,7 @@ class Question:
         bleu_score = sentence_bleu(references=[self._ref_lemmas],
                                    hypothesis=guess_lemmas,
                                    weights=(0.25, 0.25, 0, 0),
-                                   smoothing_function=chencherry.method1
+                                   smoothing_function=chencherry.method2
                                    )
         return round((jaccard_score + bleu_score) / 2, 2)
 
