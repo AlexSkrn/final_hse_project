@@ -34,12 +34,6 @@ db.init_app(app)
 current_game = QAGame()
 
 
-@app.before_first_request
-def create_tables():
-    db.drop_all()
-    db.create_all()
-
-
 @app.after_request
 def add_header(response):
     response.cache_control.max_age = 0
@@ -90,6 +84,9 @@ def upload():
                     current_game.add_bitext_from_list(res, filename)
                 elif len(res[0]) == 3:
                     _logger.info('Expected length is 3:' + str(len(res[0])))
+                    # create database tables
+                    db.drop_all()
+                    db.create_all()
                     BitextModel.save_all_to_db(res)
                     current_game.set_topics(reset=True)
                 else:
