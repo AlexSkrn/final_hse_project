@@ -34,6 +34,12 @@ db.init_app(app)
 current_game = QAGame()
 
 
+@app.before_first_request
+def create_tables():
+    db.drop_all()
+    db.create_all()
+
+
 @app.after_request
 def add_header(response):
     response.cache_control.max_age = 0
