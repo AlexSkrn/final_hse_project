@@ -12,11 +12,9 @@
         src="{{ url_for('static', filename='scripts.js') }}">
 </script>
 
-Выбранные темы:
 <form method="GET">
-  {% if selected_topics %}
-      <p>{{ selected_topics }}</p>
-      <button type="submit" name="submit_button" value="clear">Очистить темы</button>
+Выбранные темы: {% if selected_topics %} {{ selected_topics }}
+      <p><button type="submit" name="submit_button" value="clear">Очистить темы</button></p>
      {% else %} Не выбрано
   {% endif %}
 </form>
@@ -48,10 +46,9 @@
   </select>
     <button type="submit" name="submit_button" value="submit_topics">Добавить тему</button>
   </form>
-<br>
-<br>
+
 <form method="GET">
-  Q: <button type="submit" name="submit_button" value="question">Новый вопрос!</button>
+  <p>Q: <button type="submit" name="submit_button" value="question">Новый вопрос!</button></p>
 </form>
 
 
@@ -68,7 +65,7 @@
        <!-- > -->
 <!-- </input> -->
 <!-- Q: {{ data['Q'] }} <br> -->
-<button id="speak">Speak</button> <button onclick="copy()">Copy</button><br>
+<p><button id="speak">Speak</button> <button onclick="copy()">Copy</button></p>
 <form method="GET">
   A: {% if data['A'] %} <p style="color:blue;">{{ data['A'] }}</p> {% else %}
   <button type="submit" name="submit_button" value="answer">Показать ответ!</button>
