@@ -46,7 +46,10 @@ def read_file(binary_file_obj):
     first_string_elements = split_string[0].split('\t')
     for elem in first_string_elements:
         if not elem:
-            raise ValueError('Элементы первой строки не должны быть пустыми')
+            err_msg = 'Вы загружаете файл с тремя элементами в первой строке. '
+            err_msg += 'Элементы строки не должны быть пустыми. '
+            err_msg += 'Возможно, в строке есть лишний символ табуляции.'
+            raise ValueError(err_msg)
     if len(first_string_elements) == 2:
         for idx, line in enumerate(split_string):
             if len(line.strip()) > 0:  # skip empty lines
