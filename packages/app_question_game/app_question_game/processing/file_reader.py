@@ -1,9 +1,12 @@
 ORD_EXCEPTIONS = [
                   # 774,  # Combining Breve instead of 'й'
+                  8211,
                   8212, 8213, 8216, 8217,
                   8218, 8219, 8220,
                   8221,
-                  8222, 8223, 8224]
+                  8222, 8223, 8224,
+                  8470,
+                  ]
 
 
 def has_non_extended_latin(line):
