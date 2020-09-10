@@ -25,7 +25,7 @@ from app_question_game.config import get_logger
 _logger = get_logger(logger_name=__name__)
 
 app = Flask(__name__)
-app.config.from_object(ProductionConfig)
+app.config.from_object(DevelopmentConfig)
 
 # prepare app to work with db
 db.init_app(app)
